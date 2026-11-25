@@ -406,9 +406,6 @@ class Usage(ResponseModel):
     assistant_resolution_tier: str | None = None
     """How the assistant was chosen."""
 
-    assistant_resolution_space_id: str | None = field(default=None, metadata={"json": "assistantResolutionSpaceId"})
-    """The Space whose default chose the assistant."""
-
     orbtr: FlowRunUsage | None = None
     """The usage of a flow called as a model: the version that answered, the run and each step."""
 
@@ -435,9 +432,8 @@ class Usage(ResponseModel):
             assistant_id=data.get("assistant_id"),
             assistant_version_hash=data.get("assistant_version_hash"),
             assistant_resolution_tier=data.get("assistant_resolution_tier"),
-            assistant_resolution_space_id=data.get("assistantResolutionSpaceId"),
             orbtr=parse_obj(data.get("orbtr"), FlowRunUsage.from_dict),
-            extra=extra_keys(data, ("input_tokens", "output_tokens", "ot_consumed", "ot_gross_before_discount", "cached_input_ot", "fresh_input_ot", "ot_breakdown", "display_currency", "display_money_micros", "reservation_id", "loops_consumed", "billing_profile", "next_affinity_token", "assistant_id", "assistant_version_hash", "assistant_resolution_tier", "assistantResolutionSpaceId", "orbtr")),
+            extra=extra_keys(data, ("input_tokens", "output_tokens", "ot_consumed", "ot_gross_before_discount", "cached_input_ot", "fresh_input_ot", "ot_breakdown", "display_currency", "display_money_micros", "reservation_id", "loops_consumed", "billing_profile", "next_affinity_token", "assistant_id", "assistant_version_hash", "assistant_resolution_tier", "orbtr")),
         )
 
 
@@ -609,9 +605,6 @@ class MessageDeltaUsage(ResponseModel):
     assistant_resolution_tier: str | None = None
     """How the assistant was chosen."""
 
-    assistant_resolution_space_id: str | None = field(default=None, metadata={"json": "assistantResolutionSpaceId"})
-    """The Space whose default chose the assistant."""
-
     orbtr: FlowRunUsage | None = None
     """The usage of a flow called as a model: the version that answered, the run and each step."""
 
@@ -638,9 +631,8 @@ class MessageDeltaUsage(ResponseModel):
             assistant_id=data.get("assistant_id"),
             assistant_version_hash=data.get("assistant_version_hash"),
             assistant_resolution_tier=data.get("assistant_resolution_tier"),
-            assistant_resolution_space_id=data.get("assistantResolutionSpaceId"),
             orbtr=parse_obj(data.get("orbtr"), FlowRunUsage.from_dict),
-            extra=extra_keys(data, ("input_tokens", "output_tokens", "ot_consumed", "ot_gross_before_discount", "cached_input_ot", "fresh_input_ot", "ot_breakdown", "display_currency", "display_money_micros", "reservation_id", "loops_consumed", "billing_profile", "next_affinity_token", "assistant_id", "assistant_version_hash", "assistant_resolution_tier", "assistantResolutionSpaceId", "orbtr")),
+            extra=extra_keys(data, ("input_tokens", "output_tokens", "ot_consumed", "ot_gross_before_discount", "cached_input_ot", "fresh_input_ot", "ot_breakdown", "display_currency", "display_money_micros", "reservation_id", "loops_consumed", "billing_profile", "next_affinity_token", "assistant_id", "assistant_version_hash", "assistant_resolution_tier", "orbtr")),
         )
 
 
@@ -692,7 +684,7 @@ class MessageStartEvent(ResponseModel):
 
 @dataclass(kw_only=True)
 class ContentBlockStartEvent(ResponseModel):
-    """A content block begins."""
+    """The start of a content block."""
 
     type: Literal["content_block_start"]
     """Always content_block_start."""
@@ -719,7 +711,7 @@ class ContentBlockStartEvent(ResponseModel):
 
 @dataclass(kw_only=True)
 class ContentBlockDeltaEvent(ResponseModel):
-    """A piece of a content block arrives."""
+    """A piece of a content block, as it arrives."""
 
     type: Literal["content_block_delta"]
     """Always content_block_delta."""
@@ -746,7 +738,7 @@ class ContentBlockDeltaEvent(ResponseModel):
 
 @dataclass(kw_only=True)
 class ContentBlockStopEvent(ResponseModel):
-    """A content block ends."""
+    """The end of a content block."""
 
     type: Literal["content_block_stop"]
     """Always content_block_stop."""
@@ -815,7 +807,7 @@ class MessageStopEvent(ResponseModel):
 
 @dataclass(kw_only=True)
 class PingEvent(ResponseModel):
-    """Keeps the connection open."""
+    """An event that keeps the connection open."""
 
     type: Literal["ping"]
     """Always ping."""
@@ -834,7 +826,7 @@ class PingEvent(ResponseModel):
 
 @dataclass(kw_only=True)
 class ErrorEvent(ResponseModel):
-    """The stream failed after it began."""
+    """A failure the stream reports after it began."""
 
     type: Literal["error"]
     """Always error."""
