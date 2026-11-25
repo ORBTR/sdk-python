@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "orbtr"
+version = "0.0.0"
+description = "The ORBTR SDK for Python: messages, streaming, models, flows as models, token counting, embeddings and message batches on api.orbtr.ai."
+readme = "README.md"
+license = "LicenseRef-ORBTR-Proprietary"
+license-files = ["LICENSE"]
+authors = [{ name = "ORBTR Pty Ltd" }]
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.27,<1"]
+keywords = ["orbtr", "ai", "sdk", "llm", "api"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://docs.orbtr.ai/sdk/index"
+Documentation = "https://docs.orbtr.ai/sdk/index"
+
+[dependency-groups]
+dev = ["pytest==9.1.1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/orbtr"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/orbtr", "README.md", "LICENSE", "CHANGELOG.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

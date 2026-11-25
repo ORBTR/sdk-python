@@ -1,0 +1,15 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "python",
+      "package-name": "orbtr",
+      "initial-version": "0.1.0",
+      "include-v-in-tag": true,
+      "include-component-in-tag": false,
+      "extra-files": ["src/orbtr/_version.py"]
+    }
+  },
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "pull-request-title-pattern": "chore: release ${version}"
+}
