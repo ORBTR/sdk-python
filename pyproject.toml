@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "orbtr"
-version = "0.0.0"
+version = "0.1.0"
 description = "The ORBTR SDK for Python: messages, streaming, models, flows as models, token counting, embeddings and message batches on api.orbtr.ai."
 readme = "README.md"
 license = "LicenseRef-ORBTR-Proprietary"
